@@ -1,0 +1,8 @@
+echo /Backend/vendor/ > .gitignore
+echo /Backend/node_modules/ >> .gitignore
+echo /Backend/.env >> .gitignore
+echo /Backend/storage/logs/*.log >> .gitignore
+
+
+echo /Frontend/node_modules/ >> .gitignore
+echo /Frontend/.env >> .gitignore
