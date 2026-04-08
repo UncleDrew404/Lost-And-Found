@@ -726,6 +726,9 @@ These tables will be needed for the Lost and Found domain. This is an outline on
 
 ### 7.3 Entity Relationship Diagram
 
+$table->id(); => unsignedBigInteger = 8bytes Auto Increment 
+$table->increments('id'); => unsignedInteger = 4bytes Auto Increment
+
 ```mermaid
 erDiagram
     USERS ||--o{ ITEMS : creates
@@ -742,7 +745,7 @@ erDiagram
         string password
         string remember_token
         timestamps created_at_updated_at
-    }
+    } ✅ 
 
     CATEGORIES {
         bigint id PK
@@ -750,7 +753,7 @@ erDiagram
         string slug UK
         string icon
         timestamps created_at_updated_at
-    }
+    } ✅ 
 
     ITEMS {
         bigint id PK
@@ -765,7 +768,7 @@ erDiagram
         string contact_info
         string image_path
         timestamps created_at_updated_at
-    }
+    } ✅ 
 
     ITEM_IMAGES {
         bigint id PK
@@ -773,7 +776,7 @@ erDiagram
         string image_path
         int sort_order
         timestamps created_at_updated_at
-    }
+    } ✅ 
 
     CLAIMS {
         bigint id PK
@@ -782,7 +785,7 @@ erDiagram
         text message
         enum status
         timestamps created_at_updated_at
-    }
+    } ✅
 ```
 
 ---
