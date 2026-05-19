@@ -487,6 +487,8 @@ public function boot(): void
 
     RateLimiter::for('auth', function ($request) {
         return Limit::perMinute(5)->by($request->ip());
+
+        
     });
 }
 ```

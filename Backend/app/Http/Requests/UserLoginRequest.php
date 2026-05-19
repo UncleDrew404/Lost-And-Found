@@ -26,7 +26,7 @@ class UserLoginRequest extends FormRequest
     {
         return [
             'email.required' => 'The email field is required.',
-            'email.email' => 'Please enter a valid email address.',
+            'email.email' => 'Please enter a valid email address.', 
             'password.required' => 'The password field is required.',
         ];
     }

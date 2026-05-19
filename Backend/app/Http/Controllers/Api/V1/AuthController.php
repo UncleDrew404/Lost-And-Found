@@ -6,12 +6,11 @@ use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Services\AuthService;
 
 class AuthController extends BaseController
 {
-    protected $authService;
+    protected AuthService $authService;
 
     public function __construct(AuthService $authService)
     {
@@ -34,13 +33,12 @@ class AuthController extends BaseController
         return $this->success([
             'user' => $result['user'],
             'token' => $result['token'],
-            // 'token_type' => $result['token_type']
         ], $result['message']);
 
-        if (!$result['success']) {
-            $statusCode = $result['message'] === 'Invalid credentials' ? 401 : 403;
-            return $this->error($result['message'], $statusCode);
-        }
+        // if (!$result['success']) {
+        //     $statusCode = $result['message'] === 'Invalid credentials' ? 401 : 403;
+        //     return $this->error($result['message'], $statusCode);
+        // }
     }
 
     public function logout(Request $request)
@@ -50,3 +48,4 @@ class AuthController extends BaseController
         return $this->success(null, 'Logged out successfully');
     }
 }
+
