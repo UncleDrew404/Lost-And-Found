@@ -1,8 +1,15 @@
-# Repository Guidelines
+# LOST AND FOUND
 
 ## Project Structure & Module Organization
 
 This repository is split into two applications. `Backend/` contains the Laravel 12 API: controllers in `app/Http/Controllers`, requests in `app/Http/Requests`, models in `app/Models`, routes in `routes/`, database files in `database/`, and docs in `docs/`. `Frontend/` contains the Vue 3 app: views in `src/views`, layouts in `src/Layout`, router setup in `src/router`, components in `src/components`, stores in `src/stores`, and styles/assets in `src/assets`.
+
+## Tech Stack
+
+- Laravel 12
+- Vue 3
+- Tailwind
+- MySQL
 
 ## Build, Test, and Development Commands
 

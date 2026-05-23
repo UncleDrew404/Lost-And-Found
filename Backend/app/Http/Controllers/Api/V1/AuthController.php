@@ -19,26 +19,27 @@ class AuthController extends BaseController
 
     public function register(UserRegisterRequest $request)
     {
-        $validatedData = $request->validated();
+        $result = $this->authService->register($request->validated());
 
-        $user = $this->authService->register($validatedData);
-
-        return $this->created($user, 'User registered successfully');
+        return $this->created([
+            'user' => $result['user'],
+            'token' => $result['token'],
+        ], $result['message']);
     }
 
     public function login(UserLoginRequest $request)
     {
         $result = $this->authService->login($request->validated());
 
+        if (!$result['success']) {
+            $statusCode = $result['message'] === 'Invalid credentials' ? 401 : 403;
+            return $this->error($result['message'], $statusCode);
+        }
+
         return $this->success([
             'user' => $result['user'],
             'token' => $result['token'],
         ], $result['message']);
-
-        // if (!$result['success']) {
-        //     $statusCode = $result['message'] === 'Invalid credentials' ? 401 : 403;
-        //     return $this->error($result['message'], $statusCode);
-        // }
     }
 
     public function logout(Request $request)
@@ -48,4 +49,3 @@ class AuthController extends BaseController
         return $this->success(null, 'Logged out successfully');
     }
 }
-

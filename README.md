@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
 </p>
 
-<h1 align="center">🔍 Lost & Found</h1>
+<h1 align="center">Lost & Found</h1>
 
 <p align="center">
   <strong>A modern, full-stack web application for reporting, tracking, and reclaiming lost & found items.</strong>

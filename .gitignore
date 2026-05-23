@@ -1,8 +1,49 @@
-echo /Backend/vendor/ > .gitignore
-echo /Backend/node_modules/ >> .gitignore
-echo /Backend/.env >> .gitignore
-echo /Backend/storage/logs/*.log >> .gitignore
+# Dependencies
+/Backend/vendor/
+/Backend/node_modules/
+/Frontend/node_modules/
 
+# Environment files
+/Backend/.env
+/Backend/.env.*
+!/Backend/.env.example
+/Frontend/.env
+/Frontend/.env.*
+!/Frontend/.env.example
+/.env
+/.env.*
+!/.env.example
 
-echo /Frontend/node_modules/ >> .gitignore
-echo /Frontend/.env >> .gitignore
+# Build output
+/Backend/public/build/
+/Backend/public/hot
+/Frontend/dist/
+/Frontend/dist-ssr/
+
+# Runtime files
+/Backend/storage/logs/*.log
+/Backend/storage/*.key
+/Backend/storage/pail/
+
+# Test and cache output
+/Backend/.phpunit.cache/
+/Backend/.phpunit.result.cache
+/Frontend/coverage/
+/Frontend/.eslintcache
+/Frontend/*.tsbuildinfo
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+/.idea/
+/.vscode/
+/.fleet/
+/.nova/
+/.zed/
