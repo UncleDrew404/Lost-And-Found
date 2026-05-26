@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Services\AuthService;
 
 class AuthController extends BaseController
@@ -17,23 +18,21 @@ class AuthController extends BaseController
         $this->authService = $authService;
     }
 
-    public function register(UserRegisterRequest $request)
+    public function register(UserRegisterRequest $request): JsonResponse
     {
         $result = $this->authService->register($request->validated());
 
         return $this->created([
             'user' => $result['user'],
-            'token' => $result['token'],
         ], $result['message']);
     }
 
-    public function login(UserLoginRequest $request)
+    public function login(UserLoginRequest $request): JsonResponse
     {
         $result = $this->authService->login($request->validated());
 
         if (!$result['success']) {
-            $statusCode = $result['message'] === 'Invalid credentials' ? 401 : 403;
-            return $this->error($result['message'], $statusCode);
+            return $this->error($result['message'], $result['status_code'] ?? 400);
         }
 
         return $this->success([
@@ -42,7 +41,7 @@ class AuthController extends BaseController
         ], $result['message']);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $this->authService->logout($request);
 

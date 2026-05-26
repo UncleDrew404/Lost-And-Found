@@ -16,12 +16,10 @@ class AuthService
             'status' => 'active',
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
 
         return [
             'success' => true,
             'user' => $user,
-            'token' => $token,
             'message' => 'User registered successfully',
         ];
     }
@@ -33,14 +31,16 @@ class AuthService
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
             return [
                 'success' => false,
-                'message' => 'Invalid credentials'
+                'message' => 'Invalid credentials',
+                'status_code' => 401,
             ];
         }
 
         if ($user->status !== 'active') {
             return [
                 'success' => false,
-                'message' => 'Account is not active'
+                'message' => 'Account is not active',
+                'status_code' => 403,
             ];
         }
 
@@ -57,6 +57,6 @@ class AuthService
 
     public function logout(Request $request): void
     {
-        $request->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
     }
 }

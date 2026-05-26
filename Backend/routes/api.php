@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\ItemController;
 use App\Http\Controllers\Api\V1\UserController;
 
 Route::prefix('v1')->group(function () {
@@ -13,5 +14,6 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('api.v1.logout');
         Route::get('/users', [UserController::class, 'index'])->name('api.v1.user.index');
+        Route::apiResource('items', ItemController::class)->names('api.v1.items');
     });
 });
