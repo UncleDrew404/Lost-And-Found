@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
@@ -16,10 +16,14 @@ class AuthService
             'status' => 'active',
         ]);
 
+        $user->assignRole('student');
+
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return [
             'success' => true,
-            'user' => $user,
+            'user' => $user->load(['roles.permissions', 'userProfile']),
+            'token' => $token,
             'message' => 'User registered successfully',
         ];
     }
@@ -28,7 +32,7 @@ class AuthService
     {
         $user = User::where('email', $credentials['email'])->first();
 
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
             return [
                 'success' => false,
                 'message' => 'Invalid credentials',
@@ -48,10 +52,10 @@ class AuthService
 
         return [
             'success' => true,
-            'user' => $user,
+            'user' => $user->load(['roles.permissions', 'userProfile']),
             'token' => $token,
             // 'token_type' => 'Bearer',
-            'message' => 'Login successful'
+            'message' => 'Login successful',
         ];
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserLoginRequest extends FormRequest
@@ -14,6 +13,7 @@ class UserLoginRequest extends FormRequest
     {
         return true;
     }
+
     public function rules(): array
     {
         return [
@@ -26,7 +26,7 @@ class UserLoginRequest extends FormRequest
     {
         return [
             'email.required' => 'The email field is required.',
-            'email.email' => 'Please enter a valid email address.', 
+            'email.email' => 'Please enter a valid email address.',
             'password.required' => 'The password field is required.',
         ];
     }

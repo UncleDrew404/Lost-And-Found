@@ -9,13 +9,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('item_images', function (Blueprint $table) {
-            $table->id(); //unsignedBigInteger => auto-incrementing primary key
-            $table->foreignId('item_id')->references('id')->on('items')->cascadeOnDelete();
+            $table->id(); // unsignedBigInteger => auto-incrementing primary key
             $table->string('image_path');
             $table->integer('sort_order')->default(0);
             $table->timestamps();
 
-            
+            $table->foreignId('item_id')->references('id')->on('items')->cascadeOnDelete();
+
         });
     }
 

@@ -1,12 +1,11 @@
 <?php
 
 namespace Database\Factories;
- 
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserProfileFactory extends Factory
 {
-    
     public function definition(): array
     {
         return [
@@ -18,7 +17,7 @@ class UserProfileFactory extends Factory
             'bio' => fake()->optional(0.7)->sentence(10),
             'avatar' => null,
             'department' => fake()->randomElement(['Computer Science', 'Engineering', 'Business', 'Arts', 'Science', 'Education']),
-            'student_id' => fake()->unique()->numerify('STU-#####'),   
+            'student_id' => fake()->unique()->numerify('STU-#####'),
         ];
     }
 }

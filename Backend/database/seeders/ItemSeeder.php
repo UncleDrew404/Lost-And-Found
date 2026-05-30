@@ -2,15 +2,21 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Item;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ItemSeeder extends Seeder
 {
     public function run(): void
     {
-        Item::factory(10)
-            ->create();
+        $users = User::role(['admin', 'staff'], 'sanctum')->get();
+        $categories = Category::all();
+
+        Item::factory(10)->create([
+            'user_id' => $users->random()->id,
+            'category_id' => $categories->random()->id,
+        ]);
     }
 }

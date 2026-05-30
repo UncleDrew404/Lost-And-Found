@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\V1\UserResource;
 use App\Services\AuthService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AuthController extends BaseController
 {
@@ -23,7 +24,8 @@ class AuthController extends BaseController
         $result = $this->authService->register($request->validated());
 
         return $this->created([
-            'user' => $result['user'],
+            'user' => new UserResource($result['user']),
+            'token' => $result['token'],
         ], $result['message']);
     }
 
@@ -31,14 +33,22 @@ class AuthController extends BaseController
     {
         $result = $this->authService->login($request->validated());
 
-        if (!$result['success']) {
+        if (! $result['success']) {
             return $this->error($result['message'], $result['status_code'] ?? 400);
         }
 
         return $this->success([
-            'user' => $result['user'],
+            'user' => new UserResource($result['user']),
             'token' => $result['token'],
         ], $result['message']);
+    }
+
+    public function user(Request $request): JsonResponse
+    {
+        return $this->success(
+            new UserResource($request->user()->load(['roles.permissions', 'userProfile'])),
+            'User retrieved successfully'
+        );
     }
 
     public function logout(Request $request): JsonResponse

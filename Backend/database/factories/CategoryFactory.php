@@ -10,7 +10,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'type' => fake()->unique()->word(), 
+            'type' => fake()->unique()->word(),
         ];
     }
 }

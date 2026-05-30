@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('claims', function (Blueprint $table) {
-            $table->id(); //unsignedBigInteger => auto-incrementing primary key
+            $table->id(); // unsignedBigInteger => auto-incrementing primary key
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('user_id');
             $table->text('message')->nullable();

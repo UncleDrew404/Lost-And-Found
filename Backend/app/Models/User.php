@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
+
+    protected string $guard_name = 'sanctum';
 
     protected $fillable = [
         'email',
@@ -39,11 +42,10 @@ class User extends Authenticatable
     public function items()
     {
         return $this->hasMany(Item::class);
-    }   
+    }
 
     public function claims()
     {
         return $this->hasMany(Claim::class);
     }
 }
-

@@ -12,14 +12,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('first_name')->nullable();
-            $table->string('middle_name')->nullable();   
+            $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('gender')->nullable();
             $table->string('phone_number')->nullable();
             $table->text('bio')->nullable();
             $table->string('avatar')->nullable();
             $table->string('department')->nullable();
-            
+
             $table->string('student_id')->nullable();
             $table->timestamps();
 

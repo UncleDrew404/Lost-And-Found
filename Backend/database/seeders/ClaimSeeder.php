@@ -3,14 +3,20 @@
 namespace Database\Seeders;
 
 use App\Models\Claim;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ClaimSeeder extends Seeder
 {
     public function run(): void
     {
-        Claim::factory(10)
-            ->create();
+        $items = Item::all();
+        $students = User::role('student', 'sanctum')->get();
+
+        Claim::factory(10)->create([
+            'item_id' => $items->random()->id,
+            'user_id' => $students->random()->id,
+        ]);
     }
 }

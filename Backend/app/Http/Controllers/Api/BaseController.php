@@ -4,19 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
-
 class BaseController extends Controller
 {
     /**
      * Base Controller Response Helper
      */
-
-     protected function success($data = null, string $message = 'Success', int $code = 200)
+    protected function success($data = null, string $message = 'Success', int $code = 200)
     {
         return response()->json([
             'success' => true,
             'message' => $message,
-            'data'    => $data, 
+            'data' => $data,
         ], $code);
     }
 
@@ -24,7 +22,6 @@ class BaseController extends Controller
     {
         return $this->success($data, $message, 201);
     }
-    
 
     protected function deleted(string $message = 'Deleted successfully')
     {

@@ -8,8 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create ('categories', function (Blueprint $table) {
-            $table->id(); //unsignedBigInteger => auto-incrementing primary key
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id(); // unsignedBigInteger => auto-incrementing primary key
             $table->string('name');
             $table->string('type')->unique();
             $table->timestamps();

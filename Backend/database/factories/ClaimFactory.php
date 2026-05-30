@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Claim;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +20,8 @@ class ClaimFactory extends Factory
     public function definition(): array
     {
         return [
-            'item_id' => \App\Models\Item::factory(),
-            'user_id' => \App\Models\User::factory(),
+            'item_id' => Item::factory(),
+            'user_id' => User::factory(),
             'message' => fake()->paragraph(),
             'status' => fake()->randomElement(['pending', 'approved', 'rejected']),
         ];

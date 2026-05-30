@@ -22,7 +22,7 @@ class Item extends Model
         'image_path',
     ];
 
-    protected function casts() : array
+    protected function casts(): array
     {
         return [
             'date_occured' => 'datetime',

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Item;
 use App\Models\ItemImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,7 @@ class ItemImageFactory extends Factory
     public function definition(): array
     {
         return [
-            'item_id' => \App\Models\Item::factory(),
+            'item_id' => Item::factory(),
             'image_path' => fake()->imageUrl(),
             'sort_order' => fake()->numberBetween(1, 10),
         ];
