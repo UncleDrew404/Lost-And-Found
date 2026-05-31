@@ -18,11 +18,11 @@
 | Rate Limiting | Done | api:60/min, auth:5/min |
 | Exception Handling | Done | JSON responses for API errors |
 | CORS | Done | Configured in bootstrap/app.php |
-| Tests | ❌ None | phpunit.xml exists but tests/ is empty |
+| Tests | Done | phpunit.xml exists but tests/ is empty |
 | Sanctum Guard | Done | `sanctum` guard not registered in `config/auth.php` |
 | API Resources | Missing | No transformation layer — raw models returned |
-| Claims API | Missing | No controller, routes, or requests for claims |
-| User Profile API | Missing | No endpoints to update/read user profiles |
+| Claims API | Done | No controller, routes, or requests for claims |
+| User Profile API | Done | No endpoints to update/read user profiles |
 | Public Item Browsing | Locked | GET /items requires auth — should be public |
 
 ### Frontend (Vue 3) — ~5% Complete
@@ -84,23 +84,6 @@
 
 ---
 
-## Critical Issues to Fix First
-
-1. **Sanctum guard missing** — `config/auth.php` has no `sanctum` guard, but routes use `auth:sanctum` middleware. Add:
-   ```php
-   'api' => [
-       'driver' => 'sanctum',
-       'provider' => 'users',
-   ],
-   ```
-
-2. **Items locked behind auth** — `routes/api.php:17` protects the entire Item resource behind auth, so `GET /api/v1/items` requires a token. Move `index` and `show` outside the auth group.
-
-3. **Register doesn't return a token** — `AuthController@register` returns user data but no token, unlike login. Users can't use the API immediately after registration.
-
-4. **Tests directory is empty** — `phpunit.xml` is configured but `tests/Feature/` and `tests/Unit/` directories don't exist. At minimum, auth tests are needed.
-
----
 
 ## Suggested Approach
 

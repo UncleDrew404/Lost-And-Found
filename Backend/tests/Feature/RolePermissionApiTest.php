@@ -23,15 +23,15 @@ class RolePermissionApiTest extends TestCase
         app(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 
-    public function test_registration_assigns_student_role_and_permissions(): void
+    public function test_registration_assigns_staff_role_and_permissions(): void
     {
         $response = $this->postJson('/api/v1/register', [
-            'email' => 'student@example.com',
+            'email' => 'staff@example.com',
             'password' => 'password',
         ]);
 
         $response->assertCreated()
-            ->assertJsonPath('data.user.roles.0', 'student')
+            ->assertJsonPath('data.user.roles.0', 'staff')
             ->assertJsonPath('data.user.permissions.0', 'items.view')
             ->assertJsonStructure([
                 'data' => [
@@ -40,12 +40,15 @@ class RolePermissionApiTest extends TestCase
             ]);
     }
 
-    public function test_unauthenticated_users_cannot_view_items(): void
+    public function test_unauthenticated_users_can_view_items_but_cannot_manage_them(): void
     {
         $item = $this->createItem();
 
-        $this->getJson('/api/v1/items')->assertUnauthorized();
-        $this->getJson("/api/v1/items/{$item->id}")->assertUnauthorized();
+        $this->getJson('/api/v1/items')->assertOk();
+        $this->getJson("/api/v1/items/{$item->id}")->assertOk();
+        $this->postJson('/api/v1/items', $this->itemPayload())->assertUnauthorized();
+        $this->patchJson("/api/v1/items/{$item->id}", ['title' => 'Updated item'])->assertUnauthorized();
+        $this->deleteJson("/api/v1/items/{$item->id}")->assertUnauthorized();
     }
 
     public function test_students_can_view_items_but_cannot_manage_them(): void

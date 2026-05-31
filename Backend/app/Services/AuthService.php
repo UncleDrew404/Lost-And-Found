@@ -16,7 +16,7 @@ class AuthService
             'status' => 'active',
         ]);
 
-        $user->assignRole('student');
+        $user->assignRole('staff');
 
         $token = $user->createToken('auth_token')->plainTextToken;
 

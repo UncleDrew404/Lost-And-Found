@@ -28,9 +28,12 @@ class UserResource extends JsonResource
                         $this->userProfile?->middle_name,
                         $this->userProfile?->last_name,
                     ])->filter()->implode(' ') ?: null,
+                    'gender' => $this->userProfile?->gender,
+                    'phone_number' => $this->userProfile?->phone_number,
                     'bio' => $this->userProfile?->bio,
                     'avatar' => $this->userProfile?->avatar,
                     'department' => $this->userProfile?->department,
+                    'student_id' => $this->userProfile?->student_id,
                 ];
             }),
             'roles' => $this->when($isCurrentUser || $canViewUsers || $isAuthResponse, fn () => $this->getRoleNames()->values()),
