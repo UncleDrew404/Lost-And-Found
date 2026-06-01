@@ -25,7 +25,7 @@ class ItemController extends BaseController
     public function update(UpdateItemRequest $request, Item $item)
     {
         $item->update($request->validated());
-        $item->load(['user.userProfile', 'category', 'images']);
+        $item->load(['user.userProfile', 'category', 'images']);    
 
         return $this->success(new ItemResource($item), 'Item updated successfully');
     }
