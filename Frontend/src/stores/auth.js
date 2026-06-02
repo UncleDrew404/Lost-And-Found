@@ -77,7 +77,13 @@ export const useAuthStore = defineStore('auth', () => {
     return {
         user,
         token,
+        roles,
+        primaryRole,
         isAuthenticated,
+        isAdmin,
+        isStaff,
+        isStudent,
+        hasRole,
         setAuth,
         clearAuth,
         login,
