@@ -32,7 +32,7 @@ class ItemService
                 });
             })
             ->latest()
-            ->paginate($filters['per_page'] ?? 10)
+            ->paginate($filters['per_page'] ?? 20)
             ->withQueryString();
     }
 }

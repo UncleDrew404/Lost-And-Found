@@ -14,9 +14,9 @@ class ItemSeeder extends Seeder
         $users = User::role(['admin', 'staff'], 'sanctum')->get();
         $categories = Category::all();
 
-        Item::factory(10)->create([
-            'user_id' => $users->random()->id,
-            'category_id' => $categories->random()->id,
+        Item::factory(20)->create([
+            'user_id' => fn () => $users->random()->id,
+            'category_id' => fn () => $categories->random()->id,
         ]);
     }
 }

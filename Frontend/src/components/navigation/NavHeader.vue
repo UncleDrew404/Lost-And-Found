@@ -23,16 +23,16 @@ async function handleLogout() {
 
   try {
     await authStore.logout()
-    router.push({ name: props.loginRouteName })
   } finally {
     isLoggingOut.value = false
+    router.push({ name: props.loginRouteName })
   }
 }
 </script>
 
 <template>
   <header class="flex h-16 items-center justify-between border-b border-slate-200 bg-white px-6">
-    <h1 class="text-lg font-bold text-slate-900">{{ title }}</h1>
+    <h1 class="text-lg font-bold text-[#000000]">{{ title }}</h1>
 
     <button
       type="button"
