@@ -1,9 +1,9 @@
 <script setup>
 defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
+  // title: {
+  //   type: String,
+  //   required: true,
+  // },
   items: {
     type: Array,
     required: true,

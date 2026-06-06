@@ -36,10 +36,10 @@ class UserResource extends JsonResource
                     'student_id' => $this->userProfile?->student_id,
                 ];
             }),
-            'roles' => $this->when($isCurrentUser || $canViewUsers || $isAuthResponse, fn () => $this->getRoleNames()->values()),
-            'permissions' => $this->when($isCurrentUser || $isAuthResponse, fn () => $this->getAllPermissions()->pluck('name')->values()),
-            // 'created_at' => $this->created_at?->toISOString(),
-            // 'updated_at' => $this->updated_at?->toISOString(),
+            // 'roles' => $this->when($isCurrentUser || $canViewUsers || $isAuthResponse, fn () => $this->getRoleNames()->values()),
+            // 'permissions' => $this->when($isCurrentUser || $isAuthResponse, fn () => $this->getAllPermissions()->pluck('name')->values()),
+            'created_at' => $this->created_at?->toISOString(),
+            'updated_at' => $this->updated_at?->toISOString(),
         ];
     }
 }

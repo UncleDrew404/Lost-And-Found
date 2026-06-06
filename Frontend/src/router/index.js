@@ -40,7 +40,7 @@ const router = createRouter({
           path: 'dashboard',
           name: 'admin-dashboard',
           component: () => import('@/views/admin/AdminDashboardView.vue'),
-          meta: { title: 'Admin | Dashboard', pageTitle: 'Dashboard' },
+          meta: { title: 'Admin | Dashboard', pageTitle: 'Admin Dashboard' },
         },
         {
           path: 'items',
@@ -66,7 +66,7 @@ const router = createRouter({
           component: () => import('@/views/admin/AdminCategoriesView.vue'),
           meta: { title: 'Admin | Categories', pageTitle: 'Categories' },
         },
-        { 
+        {
           path: 'roles-permissions',
           name: 'admin-roles',
           component: () => import('@/views/admin/AdminRolesAndPermissionsView.vue'),
@@ -91,25 +91,22 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   const authStore = useAuthStore()
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next({ name: `${to.meta.role}-login`, query: { redirect: to.fullPath } })
-    return
+    return ({ name: `${to.meta.role}-login`, query: { redirect: to.fullPath } })
   }
 
   if (to.meta.role && authStore.isAuthenticated && !authStore.hasRole(to.meta.role)) {
-    next({ name: `${authStore.primaryRole}-dashboard` })
-    return
+    return ({ name: `${authStore.primaryRole}-dashboard` })
   }
 
   if (to.meta.guest && authStore.isAuthenticated) {
-    next({ name: `${authStore.primaryRole}-dashboard` })
-    return
+    return ({ name: `${authStore.primaryRole}-dashboard` })
   }
 
-  next()
+  return true
 })
 
 router.afterEach((to) => {

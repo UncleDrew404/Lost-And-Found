@@ -21,5 +21,5 @@ class RoleController extends BaseController
             ]);
 
         return $this->success($roles, 'Roles retrieved successfully');
-    }
+    }   
 }
