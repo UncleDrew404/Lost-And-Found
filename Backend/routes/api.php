@@ -11,12 +11,18 @@ use App\Http\Controllers\Api\V1\Student\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
-    Route::controller(AuthController::class)
-        ->middleware('throttle:auth')
-        ->group(function () {
+
+    Route::prefix('auth')->controller(AuthController::class)->group(function () {
+        Route::middleware('throttle:auth')->group(function () {
             Route::post('/register', 'register')->name('api.v1.register');
             Route::post('/login', 'login')->name('api.v1.login');
         });
+
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('/logout', 'logout')->name('api.v1.logout');
+            Route::get('/user', 'user')->name('api.v1.user');
+        });
+    });
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('api.v1.categories.index');
 
@@ -26,14 +32,10 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::controller(AuthController::class)->group(function () {
-            Route::post('/logout', 'logout')->name('api.v1.logout');
-            Route::get('/user', 'user')->name('api.v1.user');
-        });
-
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/profile', 'show')->name('api.v1.profile.show');
-            Route::match(['put', 'patch'], '/profile', 'update')->name('api.v1.profile.update');
+            Route::match(['put', 'patch'], '/profile', 'update')->name('api.v1.profile.update
+            ');
         });
 
         Route::middleware('permission:items.manage,sanctum')->group(function () {

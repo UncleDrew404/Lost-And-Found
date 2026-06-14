@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
 
 const props = defineProps({
   currentPage: {
@@ -92,7 +93,7 @@ function changePerPage(event) {
 
     <div class="flex flex-wrap items-center gap-2">
       <select
-        class="h-9 rounded-md border border-slate-300 bg-white px-2 text-sm text-slate-700 outline-none focus:border-[#00281B] focus:ring-2 focus:ring-[#00281B]/20"
+        class="h-9 rounded-md border border-slate-300 bg-white px-2 text-sm text-slate-700 outline-none focus:border-[#850038] focus:ring-2 focus:ring-[#850038]/20"
         :value="perPage"
         :disabled="disabled"
         @change="changePerPage"
@@ -102,28 +103,28 @@ function changePerPage(event) {
           :key="option"
           :value="option"
         >
-          {{ option }}
+          {{ option }} per page
         </option>
       </select>
 
       <button
         type="button"
-        class="h-9 rounded-md border border-slate-300 px-3 text-sm text-slate-700 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+        class="h-9 rounded-md border border-slate-300 px-2 text-sm text-slate-700 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
         :disabled="disabled || currentPage <= 1"
         @click="goToPage(currentPage - 1)"
       >
-        Previous
+        <ChevronLeft class="h-6 w-6" />
       </button>
 
       <button
         v-for="page in visiblePages"
         :key="page"
         type="button"
-        class="h-9 min-w-9 rounded-md border cursor-pointer px-3 text-sm font-medium"
+        class="h-9 min-w-9 rounded-md cursor-pointer px-3 text-sm font-medium"
         :class="
           page === currentPage
             ? 'border-[#00281B] bg-[#850038] text-white'
-            : 'border-slate-300 text-slate-700 hover:bg-slate-100'
+            : ' text-slate-700 hover:bg-slate-100'
         "
         :disabled="disabled"
         @click="goToPage(page)"
@@ -133,11 +134,11 @@ function changePerPage(event) {
 
       <button
         type="button"
-        class="h-9 rounded-md border border-slate-300 px-3 text-sm text-slate-700 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+        class="h-9 rounded-md border border-slate-300 px-2 text-sm text-slate-700 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
         :disabled="disabled || currentPage >= lastPage"
         @click="goToPage(currentPage + 1)"
       >
-        Next
+        <ChevronRight class="h-6 w-6" />
       </button>
     </div>
   </div>

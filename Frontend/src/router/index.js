@@ -91,22 +91,22 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    return ({ name: `${to.meta.role}-login`, query: { redirect: to.fullPath } })
+    next ({ name: `${to.meta.role}-login`, query: { redirect: to.fullPath } })
   }
 
   if (to.meta.role && authStore.isAuthenticated && !authStore.hasRole(to.meta.role)) {
-    return ({ name: `${authStore.primaryRole}-dashboard` })
+    next ({ name: `${authStore.primaryRole}-dashboard` })
   }
 
   if (to.meta.guest && authStore.isAuthenticated) {
-    return ({ name: `${authStore.primaryRole}-dashboard` })
+    next ({ name: `${authStore.primaryRole}-dashboard` })
   }
 
-  return true
+  next()
 })
 
 router.afterEach((to) => {

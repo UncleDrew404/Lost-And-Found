@@ -20,7 +20,7 @@ const pagination = ref({
 })
 
 const columns = [
-  { key: 'image_path', label: 'Images' },
+  // { key: 'image_path', label: 'Images' },
   { key: 'title', label: 'Title' },
   { key: 'category', label: 'Category' },
   { key: 'location', label: 'Location' },
