@@ -38,6 +38,7 @@ class RolePermissionSeeder extends Seeder
                 'items.manage',
                 'categories.manage',
                 'claims.moderate',
+                'users.view',
             ]);
 
         Role::findOrCreate('admin', $guard)

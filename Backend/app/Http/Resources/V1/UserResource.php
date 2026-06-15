@@ -37,7 +37,7 @@ class UserResource extends JsonResource
             //     ];
             // }),
             'roles' => $this->when($isCurrentUser || $canViewUsers || $isAuthResponse, fn () => $this->getRoleNames()->values()),
-            // 'permissions' => $this->when($isCurrentUser || $isAuthResponse, fn () => $this->getAllPermissions()->pluck('name')->values()),
+            'permissions' => $this->when($isCurrentUser || $isAuthResponse, fn () => $this->getAllPermissions()->pluck('name')->values()),
             'created_at' => $this->created_at?->toISOString(),
             'updated_at' => $this->updated_at?->toISOString(),
         ];
